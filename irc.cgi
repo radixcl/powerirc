@@ -9,7 +9,7 @@ if ($argc < 4) {
 }
 
 $id = $argv[1];
-$nick = $argv[2];
+$nick = sanitizenick($argv[2]);
 $remip = $argv[3];
 
 // IPC socket creation
