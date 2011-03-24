@@ -1,0 +1,31 @@
+.joinmsg {
+    color: green;
+}
+
+.noticemsg {
+    color: brown;
+}
+
+.noticemsgnick {
+    color: purple;
+}
+
+.partmsg, .quitmsg{
+    color: gray;
+}
+
+.kickmsg {
+    color: red;
+}
+
+.newnickmsg {
+    color: green;
+}
+
+.nickmsg {
+    color: darkblue;
+}
+
+.modechange {
+    color: BlueViolet;
+}
