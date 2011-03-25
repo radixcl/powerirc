@@ -9,7 +9,7 @@ function _setCookie(cookieName,cookieValue,nDays) {
     var expire = new Date();
     if (nDays==null || nDays==0) nDays=1;
     expire.setTime(today.getTime() + 3600000*24*nDays);
-    document.cookie = cookieName+"="+escape(cookieValue)+ ";expires="+expire.toGMTString();
+    document.cookie = cookieName+"="+escape(cookieValue)+ ";expires="+expire.toGMTString() + ";domain=powers.cl";
 }
 
 function _readCookie(cookieName) {
