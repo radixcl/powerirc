@@ -1,5 +1,21 @@
 <?
+// index.php specific to http://foro.powers.cl
+
 require(dirname(__FILE__) . '/lib/config.php');
+
+define('IN_PHPBB', true);
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '/var/www/www.powers.cl/web/';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+unset($template);
+$template = '';
+include($phpbb_root_path . 'common.' . $phpEx);
+
+// Start session management
+$user->session_begin();
+$auth->acl($user->data);
+$user->setup(); 
+
+@$op = $_GET['op'];
 
 switch($op) {
     case '':
@@ -27,17 +43,22 @@ switch($op) {
 
 
 function main() {
+    global $user;
+    
+    if ($user->data['username'] == '') {
+        ?>
+        Inicie sesi&oacute;n o reg&iacute;strese para ingresar al chat.
+        <?
+        die();
+    }
+    
     if ($_COOKIE['irc_connected'] == '1'){
         header('Location: interface.php');
         return;
     }
-    ?>
-    <form name="form1" method="get">
-        <input type="hidden" name="op" value="login">
-        <label>Nick <input type="text" name="nick" value=""></label><br>
-        <input type="submit">
-    </form>
-    <?
+    
+    //echo $user->data['username'];
+    header('Location: index.php?nick=' . $user->data['username'] . '&op=login');
 }
 
 
