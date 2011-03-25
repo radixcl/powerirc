@@ -4,21 +4,29 @@ function isIE() {
     return /msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent);
 }
 
-function _setCookie(cookieName,cookieValue,nDays) {
-    var today = new Date();
-    var expire = new Date();
-    if (nDays==null || nDays==0) nDays=1;
-    expire.setTime(today.getTime() + 3600000*24*nDays);
-    document.cookie = cookieName+"="+escape(cookieValue)+ ";expires="+expire.toGMTString() + ";domain=powers.cl";
+function _setCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
 }
 
-function _readCookie(cookieName) {
-    var theCookie=""+document.cookie;
-    var ind=theCookie.indexOf(cookieName+"=");
-    if (ind==-1 || cookieName=="") return "";
-    var ind1=theCookie.indexOf(";",ind);
-    if (ind1==-1) ind1=theCookie.length; 
-    return unescape(theCookie.substring(ind+cookieName.length+1,ind1));
+function _readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function _eraseCookie(name) {
+	createCookie(name,"",-1);
 }
 
 var svrno;
@@ -28,12 +36,12 @@ if (Math.floor(Math.random()*10) > 5) {
     svrno = 2;
 }
 
-
-if (isNaN(parseInt(_readCookie('chat_svr')))) {
-    _setCookie('chat_srv', svrno, 2);
+if (_readCookie('chatsrv') == null) {
+    _setCookie('chatsrv', svrno, 2);
 } else {
-    svrno = _readCookie('chat_svr');
+    svrno = _readCookie('chatsrv');
 }
+
 
 if (_readCookie('hidefpchat') != 'true') {
     if (isIE()) {
