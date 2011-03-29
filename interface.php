@@ -319,7 +319,8 @@
 		if (buf[i] == '') continue;
 
 		if (cmds[0] == 'S_ERROR') {
-		    //alert('Disconnected from IRC Server');
+		    //alert('Disconnected from IRC Server ');
+		    //$("#servertab-content").append('<span class="servererror">' + buf + '</span><br>');
 		    clearInterval(interval);
 		    $.cookie('irc_connected', 0);
 		    setTimeout(function(){
@@ -333,6 +334,11 @@
 		    continue;
 		} else if (cmds[0] == 'PING' && processping == false) {
 		    cmds = '';
+		    continue;
+		}
+		
+		if (cmds[0] == 'ERROR') {
+		    $("#servertab-content").append('<span class="servererror">' + buf + '</span><br>');
 		    continue;
 		}
 		

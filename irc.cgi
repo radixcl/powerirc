@@ -19,16 +19,19 @@ $socknam = '/tmp/IRC_' . $id .'.sock';
 $socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
 if (!socket_bind($socket, $socknam)) {
     echo 'error socket_bind';
+    @unlink($socknam);
     exit(1);
 }
 
 if (!socket_listen($socket)) {
     echo 'error socket_listen';
+    @unlink($socknam);
     exit(1);
 }
 
 if (!socket_set_nonblock($socket)) {
     echo 'error stream_set_blocking';
+    @unlink($socknam);
     exit(1);
 }
 
@@ -38,6 +41,7 @@ $fp = fsockopen($IRCDIR, $IRCPORT, $errno, $errstr, 15);
 
 if (!$fp) {
     echo "Error conencting to irc $errno $errstr\n";
+    @unlink($socknam);
     exit(1);
 }
 

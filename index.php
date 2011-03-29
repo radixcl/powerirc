@@ -1,8 +1,10 @@
 <?
 require(dirname(__FILE__) . '/lib/config.php');
 
+$op = (empty($_GET['op'])) ? 'main' : $_GET['op'];
+
 switch($op) {
-    case '':
+    case 'main':
         main();
         break;
     case 'login':
@@ -27,7 +29,7 @@ switch($op) {
 
 
 function main() {
-    if ($_COOKIE['irc_connected'] == '1'){
+    if (@$_COOKIE['irc_connected'] == '1'){
         header('Location: interface.php');
         return;
     }
