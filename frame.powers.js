@@ -50,7 +50,7 @@ if (_readCookie('hidefpchat') != 'true') {
         document.write('<div style="clear: both; display: none; width: 800px; height: 400px;" id="chat_frame_content"><iframe id="chat_frame_iframe" style="height: 100%; width: 100%;" src="http://svr-' + svrno + '.foro.powers.cl/chat/index.php"></iframe></div>');
         document.write('</div>');
     } else {
-        document.write('<div id="chat_frame" style="height: 1.5em; border: 1px dotted; position: fixed; bottom: 0; background-color: aliceblue;">');
+        document.write('<div id="chat_frame" style="padding: 8px 8px 2px 8px; border: 2px groove aliceblue; position: fixed; bottom: 0; background-color: aliceblue;">');
         document.write('<div id="chat_frame_click"><a style="color: chocolate; text-decoration: none; font-weight: bold; font-family: verdana; font-size: 1.5em;" onclick="chatClick(this)" href="javascript:void 0;">&nbsp;Chat!&nbsp;</a></div>');
         document.write('<div style="border: 0px solid; display: none; height: 100%; width: 100%;" id="chat_frame_content"><iframe id="chat_frame_iframe" style="height: 100%; width: 100%;" src="http://svr-' + svrno + '.foro.powers.cl/chat/index.php"></iframe></div>');
         document.write('</div>');
